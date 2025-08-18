@@ -1,0 +1,75 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="resources">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="packaging" maxOccurs="1" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="autoResourcePackage" maxOccurs="unbounded" minOccurs="0">
+								<xs:complexType>
+									<xs:attribute name="qualifier" type="xs:string" use="required" />
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="resourcePackage" maxOccurs="unbounded" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="qualifierSet" maxOccurs="unbounded" minOccurs="0">
+											<xs:complexType>
+												<xs:attribute name="definition" type="xs:string" use="required" />
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="name" type="xs:string" use="required" />
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element maxOccurs="unbounded" name="index">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="qualifiers" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element minOccurs="1" maxOccurs="unbounded" name="qualifier">
+											<xs:complexType>
+												<xs:attribute name="name" type="xs:string" use="required" />
+												<xs:attribute name="value" type="xs:string" use="required" />
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="default" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element minOccurs="1" maxOccurs="unbounded" name="qualifier">
+											<xs:complexType>
+												<xs:attribute name="name" type="xs:string" use="required" />
+												<xs:attribute name="value" type="xs:string" use="required" />
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="indexer-config" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:any minOccurs="0" maxOccurs="unbounded" processContents="skip" />
+									</xs:sequence>
+									<xs:attribute name="type" type="xs:string" use="required" />
+									<xs:anyAttribute processContents="skip" />
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="root" type="xs:string" use="required" />
+						<xs:attribute name="startIndexAt" type="xs:string" use="required" />
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="isDeploymentMergeable" type="xs:boolean" use="optional" />
+			<xs:attribute name="majorVersion" type="xs:positiveInteger" use="optional" />
+			<xs:attribute name="targetOsVersion" type="xs:string" use="optional" />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
